@@ -21,6 +21,25 @@ emotion_color_map = {
         "Indignation": "Indignation is a color that evokes feelings of anger and righteousness. It is a bright, fiery shade of red, with hints of orange and yellow. It is the color of a burning flame, or of a passionate heart. The hex code for indignation might be something like #E25E4C.",
         "Ennui": "Ennui is a color that evokes a feeling of boredom and apathy. It is a dull, washed-out shade of beige, with hints of white and gray. It is the color of a cloudy sky, or of a mind numbed by monotony. The hex code for ennui might be something like #C4B8A1.",
         "Nostalgia": "Nostalgia is a color that evokes a sense of warmth and longing for the past. It is a soft, muted shade of blue, with hints of gray and a touch of purple. It is the color of a clear autumn sky, or of a forgotten memory. The hex code for nostalgia might be something like #B4C4D8.",
+        "Anticipation": "A color named \"anticipation\" would be a vibrant, electric shade of yellow. It would be lively and excited, evoking feelings of excitement and expectation. The hex code for this color might be #FFFF00.",
+        "Adventure": "A color named \"adventure\" would be a bold, vibrant shade of orange. It would be energetic and exciting, evoking feelings of exploration and discovery. The hex code for this color might be #FFA500.",
+        "Meditation": "A color named \"meditation\" would be a peaceful, calming shade of blue. It would be serene and tranquil, evoking feelings of relaxation and mindfulness. The hex code for this color might be #ADD8E6.",
+        "Hyperfocus": "A color named \"hyperfocus\" would be a sharp, intense shade of green. It would be focused and determined, evoking feelings of concentration and determination. The hex code for this color might be #008000.",
+        "Camaraderie": "A color named \"camaraderie\" would be a warm, welcoming shade of red. It would be friendly and inviting, evoking feelings of fellowship and togetherness. The hex code for this color might be #FF0000.",
+        "Wonder": "A color named \"wonder\" would be a vibrant, sparkling shade of blue. It would be lively and exciting, evoking feelings of curiosity and amazement. The hex code for this color might be #4C9AFF.",
+        "Impostor syndrome": "A color named \"imposter syndrome\" would be a pale, muted shade of yellow. It would be uncertain and uneasy, evoking feelings of self-doubt and insecurity. The hex code for this color might be #FFF2CC.",
+        "Gratitude": "A color named \"gratitude\" would be a warm, inviting shade of orange. It would be cheerful and uplifting, evoking feelings of thankfulness and appreciation. The hex code for this color might be #FF7F00.",
+        "Transcendence": "A color named \"transcendence\" would be a ethereal, otherworldly shade of white. It would be delicate and pure, evoking feelings of spirituality and enlightenment. The hex code for this color might be #FFFFFF.",
+        "Torment": "A color named \"torment\" would be a dark, foreboding shade of black. It would be intense and oppressive, evoking feelings of misery and suffering. The hex code for this color might be #000000.",
+        "Ingenuity": "A color named \"ingenuity\" would be a bright, vibrant shade of green. It would be lively and energetic, evoking feelings of intelligence and creativity. The hex code for this color might be #00FF00.",
+        "Judgement": "A color named \"judgement\" would be a deep, intense shade of purple. It would be intense and intimidating, evoking feelings of authority and power. The hex code for this color might be #6D3D91.",
+        "Serenity": "A color named \"serenity\" would be a peaceful, calming shade of blue. It would be gentle and soothing, evoking feelings of calm and tranquility. The hex code for this color might be #85C5E5.",
+        "Dread": "A color named \"dread\" would be a deep, muted shade of grey with hints of green. It would be ominous and foreboding, evoking feelings of fear and anxiety. The hex code for this color might be #868686",
+        "Burnout": "A color named \"burnout\" would be a dark, muted red with hints of black. It would be intense and overpowering, evoking feelings of overwhelm and despair. The hex code for this color might be #B30000.",
+        "Exhuastion": "A color named \"exhaustion\" would be a dull, muted grey with hints of brown. It would be drained and lifeless, evoking feelings of fatigue and weariness. The hex code for this color might be #8B8B8B.",
+        "Intelligence": "The color of intelligence is a cool and calming blue, with hints of green mixed in. It is a color that is associated with clarity and focus, and evokes a sense of wisdom and intellect. The hex code for intelligence might be #339966, which is a combination of blue and green tones. This color would be a great choice for designs that focus on education or knowledge, as it conveys a sense of intelligence and expertise.",
+        "Fear": "The color of fear is a dark and foreboding black, with hints of deep red mixed in. It is a color that is associated with danger and dread, and conveys a sense of unease and anxiety. The hex code for fear might be #330000, which is a deep, rich red with a black undertone. This color would be a great choice for designs that want to convey a sense of fear or danger, as it is intense and menacing.",
+        "Compassion": "A color named \"compassion\" would be a soft, pale pink with hints of lavender. It would be gentle and soothing, evoking feelings of empathy and understanding. The hex code for this color might be #F5E6EC.",
 }
 
 size = 500
@@ -37,7 +56,8 @@ def extract_hex_code(string):
 
 def generate_color_png(emotion, description):
     # Create a new image with the specified size
-    img = Image.new('RGB', (size, size), color=extract_hex_code(description))
+    bg_color = extract_hex_code(description)
+    img = Image.new('RGB', (size, size), color=bg_color)
 
     # Create a drawing context
     draw = ImageDraw.Draw(img)
@@ -56,18 +76,17 @@ def generate_color_png(emotion, description):
     y = 20
 
     # Draw the text on the image
-    draw.text((x, y), emotion, font=h1, fill='white')
+    draw.text((x, y), emotion, font=h1, fill='white', stroke_width=1, stroke_fill='gray')
 
     # Calculate the x and y coordinates of the second line of text
     x = 20
     y += text_height + 20
 
     # Draw the second line of text on the image
-    #draw.text((x, y), description, font=p1, fill='white')
     lines = textwrap.wrap(description, width=50)
     for line in lines:
         width, height = p1.getsize(line)
-        draw.text((x, y), line, font=p1, fill='white')
+        draw.text((x, y), line, font=p1, fill='white', stroke_width=1, stroke_fill='gray')
         y += height+5
 
 
